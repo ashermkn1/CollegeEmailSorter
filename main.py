@@ -26,9 +26,11 @@ def create_label(name: str) -> str:
 
 def get_college_emails():
     # search for unread messages from an admissions team that has no label yet
-    search_query = '{from:admission*@*.edu from:admissions*@*.edu} has:nouserlabels'
+    search_query = 'after:01/01/2021 {from:admission*@*.edu from:admissions*@*.edu} has:nouserlabels'
     # call api
     results = service.users().messages().list(userId='me', q=search_query).execute()
+    if results['resultSizeEstimate'] == 0:
+        return
     for resource in results['messages']:
         # get names of all labels
         labels = service.users().labels().list(userId='me').execute()['labels']
