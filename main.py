@@ -63,6 +63,8 @@ def authenticate() -> Credentials:
     Authenticates Gmail API session
     :return: credentials object
     """
+    # change working directory to this one
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
